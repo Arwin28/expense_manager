@@ -35,12 +35,13 @@ class ExpenseController extends Controller
 
     public function chart()
     {
+
         $expenses = DB::table('expenses')
-        ->select('expenses.category_id as category', DB::raw('sum(amount) as amount'))  ->groupBy('category_id')
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
-            ->where('expenses.user_id','=',Auth::user()->id)
-            
+            ->select('expenses.*', 'categories.name as category', DB::raw('SUM(amount) as amount'))
+            ->groupBy('expenses.category_id')
             ->get();
+            
         return $expenses;
     }
 

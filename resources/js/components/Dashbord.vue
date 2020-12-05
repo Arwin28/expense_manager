@@ -45,12 +45,11 @@ export default {
   async created() {
 
     const { data } = await axios.get("api/chart");
-    var amount1 = 0;
 
     data.forEach(d => {
       const category = d.category;
-      amount1  += parseInt(d.amount);
-      this.arrPositive.push({ category, total: amount1 });
+      const amount = d.amount;
+      this.arrPositive.push({ category, total: amount });
     });
   }
 };
