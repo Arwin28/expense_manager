@@ -38,6 +38,7 @@ class ExpenseController extends Controller
 
         $expenses = DB::table('expenses')
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
+            ->where('user_id','=',Auth::user()->id)
             ->select('expenses.*', 'categories.name as category', DB::raw('SUM(amount) as amount'))
             ->groupBy('expenses.category_id')
             ->get();

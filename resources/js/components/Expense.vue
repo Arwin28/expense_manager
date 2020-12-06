@@ -81,7 +81,7 @@
                             <label>Select Category:</label>
                             <select  class='form-control' name="category" v-model="form.category" :class="{ 'is-invalid': form.errors.has('category') }">
                               <option value='0' >Select Country</option>
-                              <option v-for='data in countries' :value='data.id'>{{ data.name }}</option>
+                              <option v-for='data in categories' :value='data.id'>{{ data.name }}</option>
                             </select>
                         <div class="form-group">
                                 <label>Amount</label>
@@ -134,7 +134,7 @@
         data(){
             return {
                 country: 0,
-                countries: [],
+                categories: [],
 
                 editMode: false,
                 expenses: {},
@@ -259,10 +259,10 @@
                 }, 30000);
             },
 
-                  getCountries(){
+            getCountries(){
               axios.get('api/get_data_dropdown')
               .then(function (response) {
-                 this.countries = response.data;
+                 this.categories = response.data;
               }.bind(this));
 
             }
