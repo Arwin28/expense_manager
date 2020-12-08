@@ -32,13 +32,17 @@
                             <v-th  sortKey="category">Category</v-th>
                             <v-th  sortKey="name">Description</v-th>
                             <v-th  sortKey="amount">Amount</v-th>
+                            <v-th  sortKey="entry_at">Entry Date</v-th>
+                            <v-th  sortKey="created_at">Created Date</v-th>
                             <th>Modify</th>
                             </thead>
                             <tbody slot="body" slot-scope="{displayData}">
                             <tr v-for="row in displayData" :key="row.guid">
                                 <td>{{ row.category }}</td>
                                 <td>{{ row.description }}</td>
-                                <td>{{ row.amount }}</td>
+                                <td>{{ row.amount }}</td>                    
+                                <td>{{ row.entry_at }}</td>
+                                <td>{{ row.created_at }}</td>
                                 <td>
                                     <a href="#" @click="editModal(row)">
                                         <i class="fas fa-user-edit teal "></i>
@@ -79,8 +83,8 @@
                         <div class="modal-body">
                             <template>
                             <label>Select Category:</label>
-                            <select  class='form-control' name="category" v-model="form.category" :class="{ 'is-invalid': form.errors.has('category') }">
-                              <option value='0' >Select Country</option>
+                            <select  class='form-control' name="category_id" v-model="form.category_id" :class="{ 'is-invalid': form.errors.has('category') }">
+                       
                               <option v-for='data in categories' :value='data.id'>{{ data.name }}</option>
                             </select>
                         <div class="form-group">
@@ -96,6 +100,13 @@
                                        placeholder="Enter description "
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('description') }">
                                 <has-error :form="form" field="description"></has-error>
+                            </div>
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" v-model="form.entry_at"  name="entry_at"
+                                       placeholder="Enter Entry Date "
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('entry_at') }">
+                                <has-error :form="form" field="entry_at"></has-error>
                             </div>
                         </template>
                         </div>
@@ -146,8 +157,9 @@
                 form: new Form({
                     id: '',
                     amount: '',
-                    category: '',
+                    category_id: '',
                     description: '',
+                    entry_at: '',
                 }),
                 filters: {
                     name: {value: '', keys: ['name']},

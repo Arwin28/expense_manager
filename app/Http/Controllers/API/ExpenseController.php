@@ -55,13 +55,15 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'category' => 'required',
+            'category_id' => 'required',
+            'entry_at' => 'required',
             'description' => 'required|string|max:255',
             'amount' => 'required|max:255',
 
         ]);
         return Expense::create([
-            'category_id' => $request['category'],
+            'category_id' => $request['category_id'],
+            'entry_at' => $request['entry_at'],
             'amount' => $request['amount'],
             'description' => $request['description'],
             'user_id' => Auth::user()->id,
@@ -78,10 +80,11 @@ class ExpenseController extends Controller
     public function update(Request $request, $id)
     {
         $expense =  Expense::findOrFail($id);
-        $this->validate($request,[
-            'category' => 'required',
+        $hello = $this->validate($request,[
+            'category_id' => 'required',
             'description' => 'required|string|max:255',
             'amount' => 'required|max:255',
+            'entry_at' => 'required',
         ]);
 
         $expense->update($request->all());

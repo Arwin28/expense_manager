@@ -18,6 +18,7 @@ class CreateExpensesTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable()->index();
             $table->integer('user_id');
             $table->string('amount');
+            $table->timestamp('entry_at');
             $table->string('description');
             $table->timestamps();
         });

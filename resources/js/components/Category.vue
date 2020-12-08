@@ -69,7 +69,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 v-show="!editMode" class="modal-title" id="addNewLabel">Add new </h5>
-                        <h5 v-show="editMode" class="modal-title" id="addNewLabel2">Update user </h5>
+                        <h5 v-show="editMode" class="modal-title" id="addNewLabel2">Update category </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

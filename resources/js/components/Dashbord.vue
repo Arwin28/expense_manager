@@ -2,12 +2,12 @@
   <div class="container">
     <div class="row mt-5">
       <div class="col">
-        <h1 class="text-center">Total Expense Graph</h1>
+        <h1 class="text-center">My Expenses</h1>
       </div>
     </div>
     <div class="row mt-5" v-if="arrPositive.length > 0">
       <div class="col">
-        <bar-chart
+        <pie-chart
           :chartData="arrPositive"
           :options="chartOptions"
           :chartColors="positiveChartColors"
@@ -21,11 +21,12 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import BarChart from "./BarChart";
+import PieChart from "./BarChart";
 
 export default {
+  name: "chart",
   components: {
-    BarChart
+    PieChart
   },
   data() {
     return {
@@ -38,7 +39,11 @@ export default {
       },
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        pieceLabel: {
+        mode: 'percentage',
+        precision: 1
+      }
       }
     };
   },
@@ -54,3 +59,14 @@ export default {
   }
 };
 </script>
+
+<style>
+#chart {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>

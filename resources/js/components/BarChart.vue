@@ -1,8 +1,8 @@
 <script>
-import { Bar } from "vue-chartjs";
+import { Pie } from "vue-chartjs";
 
 export default {
-  extends: Bar,
+  extends: Pie,
   props: {
     label: {
       type: String
@@ -18,7 +18,7 @@ export default {
     }
   },
   mounted() {
-    const dates = this.chartData.map(d => d.category).reverse();
+    const category = this.chartData.map(d => d.category).reverse();
     const totals = this.chartData.map(d => d.total).reverse();
 
     const {
@@ -30,15 +30,16 @@ export default {
 
     this.renderChart(
       {
-        labels: dates,
+        labels: category,
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: 10,
         datasets: [
           {
             label: this.label,
             data: totals,
-            borderColor: borderColor,
             pointBorderColor: pointBorderColor,
             pointBackgroundColor: pointBackgroundColor,
-            backgroundColor: backgroundColor
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
           }
         ]
       },
