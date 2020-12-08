@@ -30,8 +30,7 @@
                             <thead slot="head">
                             <v-th  sortKey="name">Name</v-th>
                             <v-th  sortKey="email">Email</v-th>
-                            <v-th  sortKey="type" >Type</v-th>
-                            <v-th  sortKey="isOnline">Status</v-th>
+                            <v-th  sortKey="type" >Role</v-th>
                             <v-th  :customSort="dateSort">Registered</v-th>
                             <th>Action</th>
                             </thead>
@@ -42,12 +41,6 @@
                                 <td>
                                     {{ row.type}}
                                 </td>
-                                <div v-if="row.isOnline == true">
-                                    <td><span class="badge badge-success">Online</span></td>
-                                </div>
-                                <div v-if="row.isOnline == false">
-                                    <td><span class="badge badge-danger">Offline</span></td>
-                                </div>
                                 <td>{{row.created_at | myDate}}</td>
                                 <td>
                                     <a href="#" @click="editModal(row)">
@@ -117,14 +110,11 @@
 
 
                             <div class="form-group">
-                                <label>User Type</label>
-                                <select name="type" v-model="form.type" id="type" class="form-control"
-                                        :class="{ 'is-invalid': form.errors.has('type') }">
-                                    <option value="">Select User Role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="user">Standard User</option>
-                                    <option value="author">Author</option>
-                                </select>
+                               <label>Select Role:</label>
+                                <select  class='form-control' name="type" v-model="form.type" :class="{ 'is-invalid': form.errors.has('type') }">
+                       
+                              <option v-for='data in roles' :value='data.name'>{{ data.name }}</option>
+                            </select>
                                 <has-error :form="form" field="type"></has-error>
                             </div>
 
@@ -280,6 +270,14 @@
                     this.loadUsers();
 
                 }, 30000);
+            },
+
+             getRoles(){
+              axios.get('api/get_roles')
+              .then(function (response) {
+                 this.roles = response.data;
+              }.bind(this));
+
             }
         },
         mounted() {
@@ -298,6 +296,10 @@
                 this.loadUsers();
             });
             this.intervalFetchData();
+        },
+
+        created: function(){
+            this.getRoles()
         }
     }
 </script>

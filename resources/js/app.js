@@ -43,6 +43,7 @@ import Home from "./components/Home";
 import Category from "./components/Category";
 import Expense from "./components/Expense";
 import BarChart from "./components/BarChart";
+import Roles from "./components/Roles";
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
@@ -71,6 +72,7 @@ let routes = [
     { path: '/Expense', component: Expense },
     { path: '/BarChart', component: BarChart },
     { path: '*', component:NotFound },
+    { path: '/Roles', component: Roles },
 
 ]
 

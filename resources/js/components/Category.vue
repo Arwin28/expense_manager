@@ -21,7 +21,7 @@
                                    v-model="filters.name.value"
                             />
                         </div>
-                        <v-table class="table table-hover text-nowrap" :data="categories"
+                        <v-table class="table table-hover text-nowrap" :data="roles"
                                  :filters="filters"
                                  :hideSortIcons="true"
                                  :currentPage.sync="currentPage"
@@ -69,7 +69,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 v-show="!editMode" class="modal-title" id="addNewLabel">Add new </h5>
-                        <h5 v-show="editMode" class="modal-title" id="addNewLabel2">Update category </h5>
+                        <h5 v-show="editMode" class="modal-title" id="addNewLabel2">Update role </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -101,7 +101,7 @@
         data() {
             return {
                 editMode: false,
-                categories: {},
+                roles: {},
                 pageSize: 5,
                 currentPage: 1,
                 totalPages: 0,
@@ -135,7 +135,7 @@
             },
             updateUser() {
                 this.$Progress.start();
-                this.form.put('api/categories/' + this.form.id)
+                this.form.put('api/roles/' + this.form.id)
                     .then(() => {
                         Fire.$emit('AfterCreate');
                         $('#addNew').modal('hide')
@@ -165,7 +165,7 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.value) {
-                        this.form.delete('api/categories/' + id)
+                        this.form.delete('api/roles/' + id)
                             .then((res) => {
 
                                 Swal.fire(
@@ -188,15 +188,15 @@
             loadUsers() {
                 if (this.$gate.isAdminOrAuthor) {
 
-                    axios.get("api/categories").then(({data}) => {
-                        this.categories = data;
-                        this.totalPages = Math.round((this.categories.length)/(this.pageSize))+1 ;
+                    axios.get("api/roles").then(({data}) => {
+                        this.roles = data;
+                        this.totalPages = Math.round((this.roles.length)/(this.pageSize))+1 ;
                     });
                 }
             },
             createUser() {
                 this.$Progress.start()
-                this.form.post('api/categories')
+                this.form.post('api/roles')
                     .then(() => {
                         Fire.$emit('AfterCreate');
                         $('#addNew').modal('hide')
@@ -226,7 +226,7 @@
                 let text = this.$parent.search;
                 axios.get('api/findUser?q=' + text)
                     .then((data) => {
-                        this.categories = data
+                        this.roles = data
                     })
                     .chatch((err) => {
                         console.log(err)

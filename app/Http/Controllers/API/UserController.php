@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,11 +23,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (\Gate::allows('isAdmin')  || \Gate::allows('isAuthor')) {
-            $users= User::all()->map(function ($user) {
-                $user->isOnline = $user->isOnline();
-                return $user;
-            });
+        if (\Gate::allows('isAdmin')) {
+            $users = DB::table('users')
+            ->join('roles', 'users.type', '=', 'roles.name')
+            ->select('users.*', 'roles.name as roles')
+            ->get();
         }
         
         return $users;

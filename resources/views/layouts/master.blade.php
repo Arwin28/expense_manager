@@ -119,7 +119,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <p>Users</p>
                                 </router-link>
                             </li>
-
+                            <li class="nav-item">
+                                <router-link to="/Roles" class="nav-link ">
+                                    <i class="fas fa-list nav-icon sunflower"></i>
+                                    <p>Roles</p>
+                                </router-link>
+                            </li>
                             <li class="nav-item">
                                 <router-link to="/Category" class="nav-link ">
                                     <i class="fas fa-list nav-icon sunflower"></i>

@@ -271,7 +271,7 @@
                 }, 30000);
             },
 
-            getCountries(){
+            getCategories(){
               axios.get('api/get_data_dropdown')
               .then(function (response) {
                  this.categories = response.data;
@@ -281,7 +281,7 @@
         },
   
         created: function(){
-            this.getCountries()
+            this.getCategories()
         }
     }
 </script>

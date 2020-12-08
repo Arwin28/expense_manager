@@ -92,7 +92,7 @@ class CategoryController extends Controller
      *
      * @return void
      */
-    public function getCountries()
+    public function getCategories()
     {
         $data = Category::get();
 

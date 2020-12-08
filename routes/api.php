@@ -23,11 +23,14 @@ Route::apiResources([
     'categories' => 'API\CategoryController',
     'expenses' => 'API\ExpenseController',
     'chart' => 'API\ExpenseController',
+    'roles' => 'API\RoleController',
 ]);
 
 Route::get('profile','API\UserController@profile');
 Route::get('findUser','API\UserController@search');
 Route::put('profile','API\UserController@updateProfile');
 Route::get('categories','API\CategoryController@index');
-Route::get('get_data_dropdown', 'API\CategoryController@getCountries');
+Route::get('get_data_dropdown', 'API\CategoryController@getCategories');
 Route::get('chart','API\ExpenseController@chart');
+Route::get('roles','API\RoleController@index');
+Route::get('get_roles','API\RoleController@getRoles');
